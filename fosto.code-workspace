@@ -1,0 +1,17 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "pages"
+	},
+	{
+		"path": "styles"
+	},
+	{
+		"path": "components"
+	}
+],
+  "settings": {}
+}
