@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import Navbar from "../components/Navbar";
+import "../styles/main.scss";
 
 class Index extends Component {
   render() {
-    return (
-      <div>
-        <Navbar />
-      </div>
-    );
+    return <h1>Hello World </h1>;
   }
 }
 
