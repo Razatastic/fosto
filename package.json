@@ -6,8 +6,6 @@
   "author": "Ahmad Raza <raza2157@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@material-ui/core": "^3.9.2",
-    "@material-ui/icons": "^3.0.2",
     "@zeit/next-sass": "^1.0.1",
     "next": "^8.0.1",
     "node-sass": "^4.11.0",
@@ -17,8 +15,6 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "sass-docs": "node-sass -w -r ./src/styles/ -o ./docs/css/",
-    "sass": "node-sass ./styles/ -o ./dist/css/ -w -r --source-map-embed --source-map-contents --output-style expanded | node-sass ./styles/main.scss ./dist/css/main.min.css -w --output-style compressed"
+    "start": "next start"
   }
 }

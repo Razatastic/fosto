@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "../styles/main.scss";
+import Navbar from "../components/Navbar";
 
 class Index extends Component {
   render() {
-    return <h1>Hello World </h1>;
+    return <Navbar />;
   }
 }
 
