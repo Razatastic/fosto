@@ -9,7 +9,7 @@ export default function Navbar() {
         </Link>
       </li>
       <li className="loginTab">
-        <Link href="/authentication/Login">
+        <Link href="/authentication/login">
           <a>Login</a>
         </Link>
       </li>
