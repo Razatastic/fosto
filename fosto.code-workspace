@@ -4,17 +4,16 @@
       "path": "."
     },
     {
-      "path": "pages"
+      "path": "src/images"
     },
     {
-      "path": "styles"
+      "path": "src/pages"
     },
     {
-      "path": "components"
+      "path": "src/components"
     },
     {
-      "path": "database"
+      "path": "src/styles"
     }
-  ],
-  "settings": {}
+  ]
 }
