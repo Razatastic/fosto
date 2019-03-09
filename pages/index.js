@@ -1,13 +1,12 @@
-import Navbar from "../components/Navbar";
-import "../styles/main.scss";
+import Navbar from '../components/Navbar';
+import '../styles/main.scss';
+import LandingPage from '../components/LandingPage';
 
 function Home() {
   return (
     <div>
       <Navbar />
-      <div className="vertical-center buttonContainer">
-        <h1>Welcome to Fosto</h1>
-      </div>
+      <LandingPage />
     </div>
   );
 }
