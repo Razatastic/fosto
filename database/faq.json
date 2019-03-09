@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "q": "Whats's the main purpose of Fosto?",
+    "a": "Fosto is designed in an effort to help solve the problem of not having a universal lost and found application for the general community."
+  },
+  {
+    "id": "2",
+    "q": "How does it work?",
+    "a": "Users of Fosto are given two options when they first enter the website. A Lost and Found section. They can either click on the lost section to describe an item they found, or click on a found item to connect to the person that lost it, and create a listing on the map that would show up as a pin-drop."
+  },
+  {
+    "id": "3",
+    "q": "How long does a user created listing last?",
+    "a": "It lasts for 10 days. Users have the option to renew their listing if they want an extension."
+  },
+  {
+    "id": "4",
+    "q": "What are some ways a user can communicate with the person that lost or found an item?",
+    "a": "They can use a Live chat system or an email to communicate with another user."
+  },
+  {
+    "id": "5",
+    "q": "When happens when a user finds an item?",
+    "a": "They can drop off at a closeby institution or a government agency, and create a listing on the map."
+  },
+  {
+    "id": "6",
+    "q": "When happens when a user loses an item?",
+    "a": "They can create a listing on the map to ask other users to help find it. In return they can provide some sort of a reward."
+  }
+]
