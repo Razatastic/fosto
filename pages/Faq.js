@@ -8,8 +8,8 @@ function FAQ() {
       {/* Title */}
       <h2 className="vertical-center">Frequently Asked Questions</h2>
       <ol>
-        {data.map(dataValue => (
-          <li>
+        {data.map((dataValue, i) => (
+          <li key={i}>
             <h5> {dataValue.q}</h5>
             <h6> {dataValue.a}</h6>
           </li>
