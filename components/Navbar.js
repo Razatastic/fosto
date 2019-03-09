@@ -8,6 +8,7 @@ export default function Navbar() {
           <a>Fosto</a>
         </Link>
       </li>
+   </Link>
       <li className="loginTab">
         <Link href="/authentication/login">
           <a>Login</a>
