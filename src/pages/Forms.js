@@ -1,5 +1,5 @@
-import React from 'react';
-import LostForm from '../components/LostForm';
+import React from "react";
+import LostForm from "../components/LostForm";
 
 function Forms() {
   return <LostForm />;
