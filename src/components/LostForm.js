@@ -1,16 +1,5 @@
 import React, { Component } from "react";
-import {
-  Form,
-  DatePicker,
-  Button,
-  Input,
-  Tooltip,
-  Select,
-  AutoComplete
-} from "antd";
-
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
+import { Form, DatePicker, Button, Input, Tooltip, Row, Col } from "antd";
 
 class LostForm extends Component {
   handleSubmit = e => {
@@ -31,8 +20,7 @@ class LostForm extends Component {
   };
 
   state = {
-    confirmDirty: false,
-    autoCompleteResult: []
+    confirmDirty: false
   };
 
   handleSubmit = e => {
@@ -66,21 +54,8 @@ class LostForm extends Component {
     callback();
   };
 
-  handleWebsiteChange = value => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = [".com", ".org", ".net"].map(
-        domain => `${value}${domain}`
-      );
-    }
-    this.setState({ autoCompleteResult });
-  };
-
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -89,102 +64,101 @@ class LostForm extends Component {
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
+        sm: { span: 8 }
       }
     };
     const config = {
       rules: [
-        { type: "object", required: true, message: "Please select a date!" }
+        { type: "object", required: true, message: "Please select a date" }
       ]
     };
 
-    const prefixSelector = getFieldDecorator("prefix", {
-      initialValue: "+1"
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    );
-
     return (
-      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="Date">
-          {getFieldDecorator("date-picker", config)(<DatePicker />)}
-        </Form.Item>
+      <Row className="center">
+        <Col>
+          <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            <Form.Item label="Date">
+              {getFieldDecorator("date-picker", config)(<DatePicker />)}
+            </Form.Item>
 
-        <Form.Item
-          label={
-            <span>
-              Lost Item&nbsp;
-              <Tooltip title="What do you want others to call you?" />
-            </span>
-          }
-        >
-          {getFieldDecorator("itemLost", {
-            rules: [
-              {
-                required: true,
-                message: "Please input the item you've lost",
-                whitespace: true
+            <Form.Item
+              label={
+                <span>
+                  Lost Item&nbsp;
+                  <Tooltip title="What do you want others to call you?" />
+                </span>
               }
-            ]
-          })(<Input />)}
-        </Form.Item>
+            >
+              {getFieldDecorator("itemLost", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please enter the item you've lost",
+                    whitespace: true
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
 
-        <Form.Item
-          label={
-            <span>
-              Location&nbsp;
-              <Tooltip title="What do you want others to call you?" />
-            </span>
-          }
-        >
-          {getFieldDecorator("location", {
-            rules: [
-              {
-                required: true,
-                message: "Please input the item you've lost",
-                whitespace: true
+            <Form.Item
+              label={
+                <span>
+                  Location&nbsp;
+                  <Tooltip title="What do you want others to call you?" />
+                </span>
               }
-            ]
-          })(<Input />)}
-        </Form.Item>
+            >
+              {getFieldDecorator("location", {
+                rules: [
+                  {
+                    required: true,
+                    message:
+                      "Please enter the last known location of the item lost.",
+                    whitespace: true
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
 
-        <Form.Item label="E-mail">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                type: "email",
-                message: "The input is not valid E-mail!"
-              },
-              {
-                required: true,
-                message: "Please input your E-mail!"
-              }
-            ]
-          })(<Input />)}
-        </Form.Item>
+            <Form.Item label="E-mail">
+              {getFieldDecorator("email", {
+                rules: [
+                  {
+                    type: "email",
+                    message: "The input is not valid E-mail"
+                  },
+                  {
+                    required: true,
+                    message: "Please enter your E-mail"
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
 
-        <Form.Item label="Phone Number">
-          {getFieldDecorator("phone", {
-            rules: [
-              { required: false, message: "Please input your phone number!" }
-            ]
-          })(<Input addonBefore={prefixSelector} style={{ width: "100%" }} />)}
-        </Form.Item>
+            <Form.Item label="Phone Number">
+              {getFieldDecorator("phone", {
+                rules: [
+                  {
+                    required: false,
+                    message: "Please input your phone number!"
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            xs: { span: 24, offset: 0 },
-            sm: { span: 16, offset: 8 }
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+            <Form.Item
+              wrapperCol={{
+                xs: { span: 24, offset: 0 },
+                sm: { span: 16, offset: 8 }
+              }}
+            >
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
