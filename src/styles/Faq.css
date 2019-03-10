@@ -1,6 +1,13 @@
 .faqTitle {
-  color: #9955ed;
+  color: #10464c;
   font-family: BebasNeue;
+  font-weight: bold;
+  border-style: solid;
+
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 .questionStyle {
@@ -14,4 +21,5 @@
   font-family: BebasNeue;
   font-style: oblique;
   font-size: 18px;
+  margin: 20px;
 }
