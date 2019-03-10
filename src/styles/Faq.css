@@ -1,0 +1,17 @@
+.faqTitle {
+  color: #9955ed;
+  font-family: BebasNeue;
+}
+
+.questionStyle {
+  color: #000000;
+  font-weight: bold;
+  font-family: BebasNeue;
+  font-size: 19px;
+}
+
+.answerStyle {
+  font-family: BebasNeue;
+  font-style: oblique;
+  font-size: 18px;
+}
