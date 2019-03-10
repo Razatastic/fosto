@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon } from "antd";
 import { NavLink } from "react-router-dom";
+import Logo from "../images/logo.png";
 
 export default class App extends Component {
   state = {
@@ -23,8 +24,7 @@ export default class App extends Component {
         {/* Link to Home Page */}
         <Menu.Item key="home">
           <NavLink to="/">
-            <Icon type="home" />
-            Fosto
+            <img src={Logo} style={{ width: "10vh" }} alt="logo" />
           </NavLink>
         </Menu.Item>
         {/* Link to Lost/Found Forms */}
