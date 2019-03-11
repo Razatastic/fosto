@@ -50,7 +50,7 @@ class LostForm extends Component {
     };
 
     return (
-      <Row className="center">
+      <Row className="vertical-center" style={{ paddingTop: 40 }}>
         <Col>
           <Form {...formItemLayout} onSubmit={this.handleSubmit}>
             {/* Radio Button to switch between lost and found posting */}
