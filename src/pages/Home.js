@@ -12,8 +12,7 @@ export class MapContainer extends Component {
         <Sider>Sidebar goes here</Sider>
         <Content>
           <Map google={this.props.google} zoom={14}>
-            <Marker onClick={this.onMarkerClick} name={"Current location"} />
-
+            <Marker onClick={this.onMarkerClick} name={"Current Location"} />
             <InfoWindow onClose={this.onInfoWindowClose} />
           </Map>
         </Content>
