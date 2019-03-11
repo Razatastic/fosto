@@ -28,8 +28,8 @@ export default class App extends Component {
           </NavLink>
         </Menu.Item>
         {/* Link to Lost/Found Forms */}
-        <Menu.Item key="forms">
-          <NavLink to="/forms">
+        <Menu.Item key="submission-form">
+          <NavLink to="/submission-form">
             <Icon type="form" />
             Forms
           </NavLink>
