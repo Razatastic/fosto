@@ -1,9 +1,7 @@
 .faqTitle {
   color: #10464c;
-  font-family: BebasNeue;
   font-weight: bold;
   border-style: solid;
-
   margin-top: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
@@ -11,14 +9,12 @@
 }
 
 .questionStyle {
-  color: #000000;
+  color: #505050;
   font-weight: bold;
-  font-family: BebasNeue;
   font-size: 19px;
 }
 
 .answerStyle {
-  font-family: BebasNeue;
   font-style: oblique;
   font-size: 18px;
   margin: 20px;
