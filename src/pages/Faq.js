@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Faq.css";
-import FaqIcon from "../components/FaqIcon";
-import { Icon } from "antd";
+// import FaqIcon from "../components/FaqIcon";
+// import { Icon } from "antd";
 
 var data = require("../database/faq.json");
 
