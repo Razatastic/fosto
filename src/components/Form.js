@@ -1,57 +1,33 @@
 import React, { Component } from "react";
-import { Form, DatePicker, Button, Input, Tooltip, Row, Col } from "antd";
+import { Form, DatePicker, Button, Input, Row, Col, Radio } from "antd";
+
+const RadioGroup = Radio.Group;
 
 class LostForm extends Component {
+  state = {
+    value: 1
+  };
+
+  onChange = e => {
+    console.log("radio checked", e.target.value);
+    this.setState({
+      value: e.target.value
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-
     this.props.form.validateFields((err, fieldsValue) => {
       if (err) {
         return;
       }
-
       // Should format date value before submit.
       const values = {
         ...fieldsValue,
-        "date-picker": fieldsValue["date-picker"].format("YYYY-MM-DD")
+        "date-picker": fieldsValue["date-picker"].format("MM-DD-YYYY")
       };
       console.log("Received values of form: ", values);
     });
-  };
-
-  state = {
-    confirmDirty: false
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log("Received values of form: ", values);
-      }
-    });
-  };
-
-  handleConfirmBlur = e => {
-    const value = e.target.value;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  };
-
-  compareToFirstPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue("password")) {
-      callback("Two passwords that you enter is inconsistent!");
-    } else {
-      callback();
-    }
-  };
-
-  validateToNextPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(["confirm"], { force: true });
-    }
-    callback();
   };
 
   render() {
@@ -77,18 +53,19 @@ class LostForm extends Component {
       <Row className="center">
         <Col>
           <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            {/* Radio Button to switch between lost and found posting */}
+            <Form.Item label="Pick one:">
+              <RadioGroup onChange={this.onChange} value={this.state.value}>
+                <Radio value={1}>Lost</Radio>
+                <Radio value={2}>Found</Radio>
+              </RadioGroup>
+            </Form.Item>
+
             <Form.Item label="Date">
               {getFieldDecorator("date-picker", config)(<DatePicker />)}
             </Form.Item>
 
-            <Form.Item
-              label={
-                <span>
-                  Lost Item&nbsp;
-                  <Tooltip title="What do you want others to call you?" />
-                </span>
-              }
-            >
+            <Form.Item label={<span>Item</span>}>
               {getFieldDecorator("itemLost", {
                 rules: [
                   {
@@ -100,14 +77,7 @@ class LostForm extends Component {
               })(<Input />)}
             </Form.Item>
 
-            <Form.Item
-              label={
-                <span>
-                  Location&nbsp;
-                  <Tooltip title="What do you want others to call you?" />
-                </span>
-              }
-            >
+            <Form.Item label={<span>Location</span>}>
               {getFieldDecorator("location", {
                 rules: [
                   {
