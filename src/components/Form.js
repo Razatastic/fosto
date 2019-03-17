@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, DatePicker, Button, Input, Row, Col, Radio } from "antd";
+import Email from "../pages/auth/components/Email";
 
 const RadioGroup = Radio.Group;
 
@@ -82,38 +83,17 @@ class LostForm extends Component {
                 rules: [
                   {
                     required: true,
-                    message:
-                      "Please enter the last known location of the item lost.",
+                    message: "Please enter location.",
                     whitespace: true
                   }
                 ]
               })(<Input />)}
             </Form.Item>
 
-            <Form.Item label="E-mail">
-              {getFieldDecorator("email", {
-                rules: [
-                  {
-                    type: "email",
-                    message: "The input is not valid E-mail"
-                  },
-                  {
-                    required: true,
-                    message: "Please enter your E-mail"
-                  }
-                ]
-              })(<Input />)}
-            </Form.Item>
+            <Email getFieldDecorator={getFieldDecorator} />
 
             <Form.Item label="Phone Number">
-              {getFieldDecorator("phone", {
-                rules: [
-                  {
-                    required: false,
-                    message: "Please input your phone number!"
-                  }
-                ]
-              })(<Input />)}
+              <Input />
             </Form.Item>
 
             <Form.Item
