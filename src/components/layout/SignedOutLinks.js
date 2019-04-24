@@ -11,11 +11,7 @@ export default function SignedOutLinks() {
       defaultSelectedKeys={["1"]}
       style={{ lineHeight: "64px" }}
     >
-      <Menu.Item key="1">
-        <Link to="/">
-          <img src={logo} className="logo" alt="Fosto logo" />
-        </Link>
-      </Menu.Item>
+      <Menu.Item key="1">{logo}</Menu.Item>
       <Menu.Item key="2" style={{ float: "right" }}>
         <Link to="/login"> Sign In</Link>
       </Menu.Item>
