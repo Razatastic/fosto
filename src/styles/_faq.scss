@@ -2,10 +2,11 @@
   color: #10464c;
   font-weight: bold;
   border-style: solid;
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
+  margin: 20;
+}
+
+.faqIcon {
+  margin-right: 55%;
 }
 
 .questionStyle {
@@ -18,8 +19,4 @@
   font-style: oblique;
   font-size: 18px;
   margin: 20px;
-}
-
-.faq-title-Icon {
-  margin-right: 55%;
 }

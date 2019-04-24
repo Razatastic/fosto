@@ -13,11 +13,8 @@ code {
     monospace;
 }
 
-.sidebar {
-  margin: 50px;
-}
-
-.maps {
-  padding-left: 15px;
-  padding-right: 15px;
+.vertical-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
