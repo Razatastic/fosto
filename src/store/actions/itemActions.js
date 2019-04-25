@@ -8,7 +8,8 @@ const createItem = item => {
       .add({
         ...item,
         authorId: authorId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        resolved: false
       })
       .then(() => {
         dispatch({ type: "CREATE_ITEM", item });

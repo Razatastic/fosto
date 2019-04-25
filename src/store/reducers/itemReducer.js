@@ -1,10 +1,10 @@
 const itemReducer = (state = null, action) => {
   switch (action.type) {
-    case "CREATE_STATUS":
-      console.log("Created status", action.status);
+    case "CREATE_ITEM":
+      console.log("Created item", action.item);
       return state;
-    case "CREATE_STATUS_ERROR":
-      console.log("Create project error", action.err);
+    case "CREATE_ITEM_ERROR":
+      console.log("Create item error", action.err);
       return state;
     default:
       return state;
