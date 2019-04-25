@@ -5,7 +5,7 @@ import ItemSummary from "./ItemSummary";
 export default function ItemList({ items }) {
   return (
     <ListGroup>
-      {items && items.map(item => <ItemSummary item={item} />)}
+      {items && items.map(item => <ItemSummary key={item.id} item={item} />)}
     </ListGroup>
   );
 }
