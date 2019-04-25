@@ -1,17 +1,32 @@
 import React, { useState } from "react";
-import { SignedInLinks, SignedOutLinks } from "./";
-import fostoLogo from "../../assets/logo2.png";
+import { Collapse, Navbar, NavbarToggler, NavbarBrand } from "reactstrap";
 import { Link } from "react-router-dom";
+import SignedInLinks from "./SignedInLinks";
+import SignedOutLinks from "./SignedOutLinks";
+import logo from "../../assets/logo2.png";
+import { connect } from "react-redux";
 
-const logo = (
-  <Link to="/">
-    <img src={fostoLogo} className="logo" alt="Fosto logo" />
-  </Link>
-);
-
-function Navbar() {
-  const [auth, setAuth] = useState(true);
-  return auth ? <SignedInLinks logo={logo} /> : <SignedOutLinks logo={logo} />;
+function NavigationBar({ auth }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div>
+      <Navbar light expand="md">
+        <NavbarBrand tag={Link} to="/">
+          <img src={logo} alt="logo" style={{ width: 120 }} />
+        </NavbarBrand>
+        <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
+        <Collapse isOpen={isOpen} navbar>
+          {auth.uid ? <SignedInLinks /> : <SignedOutLinks />}
+        </Collapse>
+      </Navbar>
+    </div>
+  );
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(NavigationBar);

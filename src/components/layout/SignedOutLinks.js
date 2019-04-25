@@ -1,23 +1,25 @@
 import React from "react";
+import { Nav, NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Menu } from "antd";
-import logo from "../../assets/logo2.png";
 
-export default function SignedOutLinks() {
+export default function NavigationBar() {
   return (
-    <Menu
-      theme="light"
-      mode="horizontal"
-      defaultSelectedKeys={["1"]}
-      style={{ lineHeight: "64px" }}
-    >
-      <Menu.Item key="1">{logo}</Menu.Item>
-      <Menu.Item key="2" style={{ float: "right" }}>
-        <Link to="/login"> Sign In</Link>
-      </Menu.Item>
-      <Menu.Item key="3" style={{ float: "right" }}>
-        <Link to="/signup"> Sign Up</Link>
-      </Menu.Item>
-    </Menu>
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <NavLink tag={Link} to="/faq">
+          F.A.Q.
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink tag={Link} to="/signup">
+          Sign Up
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink tag={Link} to="/signin">
+          Sign In
+        </NavLink>
+      </NavItem>
+    </Nav>
   );
 }
