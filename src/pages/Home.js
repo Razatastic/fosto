@@ -1,12 +1,23 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Container } from "reactstrap";
+import Footer from "../components/layout/Footer";
 
-export default function Home() {
+function Home({ auth }) {
+  if (auth.uid) return <Redirect to="/dashboard" />;
   return (
-    <h1
-      style={{ height: "89vh", fontSize: "600%" }}
-      className="vertical-center"
-    >
+    <Container className="vertical-center home">
       Never "lose" anything again.
-    </h1>
+      <Footer />
+    </Container>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(Home);
