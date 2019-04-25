@@ -23,6 +23,15 @@ code {
   position: absolute;
   bottom: 0;
   width: 100%;
-  text-align: right;
-  font-style: italic;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.home {
+  height: 80vh;
+  font-size: 3vw;
+  @media (max-width: 767.98px) {
+    font-size: 5vw;
+  }
 }

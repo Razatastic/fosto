@@ -1,22 +1,26 @@
-.faqTitle {
-  color: #10464c;
-  font-weight: bold;
-  border-style: solid;
-  margin: 20;
-}
+// .faqTitle {
+//   color: #10464c;
+//   font-weight: bold;
+//   border-style: solid;
+//   margin: 20;
+// }
 
-.faqIcon {
-  margin-right: 55%;
-}
+// .faqIcon {
+//   margin-right: 55%;
+// }
 
 .questionStyle {
   color: #505050;
   font-weight: bold;
-  font-size: 19px;
+  font-size: 140%;
 }
 
 .answerStyle {
   font-style: oblique;
-  font-size: 18px;
+  font-size: 120%;
   margin: 20px;
+}
+
+.faqTitle {
+  margin: 30px;
 }
