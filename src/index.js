@@ -23,7 +23,10 @@ const store = createStore(
       useFirestoreForProfile: true,
       userProfile: "users", // Tells the previous property where to get users from
       attachAuthIsReady: true
-    })
+    }),
+    window.__REDUX_DEVTOOLS_EXTENSION__
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : f => f
   )
 );
 
