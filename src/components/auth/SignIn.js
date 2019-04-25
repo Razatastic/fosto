@@ -10,11 +10,14 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
+import { resetPass } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
+import PasswordReset from "./PasswordReset";
 
-function SignIn({ signIn, authError, auth }) {
+function SignIn({ signIn, authError, auth, resetPass, resetError }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -49,6 +52,9 @@ function SignIn({ signIn, authError, auth }) {
           />
         </FormGroup>
         <Button>Sign In</Button>
+        <Button style={{ marginLeft: 10 }} onClick={() => setModalOpen(true)}>
+          Reset Password
+        </Button>
         <div>
           {authError ? (
             <Alert color="danger" style={{ marginTop: 10 }}>
@@ -57,6 +63,12 @@ function SignIn({ signIn, authError, auth }) {
           ) : null}
         </div>
       </Form>
+      <PasswordReset
+        resetError={resetError}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        resetPass={resetPass}
+      />
     </Container>
   );
 }
@@ -64,13 +76,15 @@ function SignIn({ signIn, authError, auth }) {
 const mapStateToProps = state => {
   return {
     authError: state.auth.authError,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    resetError: state.auth.resetError
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: creds => dispatch(signIn(creds))
+    signIn: creds => dispatch(signIn(creds)),
+    resetPass: email => dispatch(resetPass(email))
   };
 };
 

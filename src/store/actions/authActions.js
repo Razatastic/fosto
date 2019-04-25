@@ -24,6 +24,7 @@ export const signOut = () => {
       .then(() => {
         dispatch({ type: "SIGNOUT_SUCCESS" });
       });
+    firebase.logout();
   };
 };
 
@@ -56,6 +57,25 @@ export const signUp = newUser => {
       })
       .catch(err => {
         dispatch({ type: "SIGNUP_ERROR", err });
+      });
+  };
+};
+
+export const resetPass = email => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        console.log("success dispatch");
+        dispatch({ type: "PASSWORD_RESET_SUCCESS" });
+      })
+      .catch(err => {
+        console.log("other");
+
+        dispatch({ type: "PASSWORD_RESET_ERROR", err });
       });
   };
 };
