@@ -4,6 +4,7 @@ import { Navbar } from "./components/layout";
 import { Home, Profile, NoMatch, Faq } from "./pages";
 import { SignIn, SignUp } from "./components/auth";
 import { Dashboard } from "./components/dashboard";
+import { CreateItem } from "./components/item";
 
 // This file houses the basic routing configuration for the application
 const App = () => (
@@ -15,7 +16,8 @@ const App = () => (
       <Route path="/profile" component={Profile} />
       <Route path="/faq" component={Faq} />
       {/* Dashboard */}
-      <Route path="/dashboard" component={Dashboard} /> */}
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/create" component={CreateItem} />
       {/* Authentication */}
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
