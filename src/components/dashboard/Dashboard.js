@@ -5,20 +5,24 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import { PostButton } from "./";
+import MapView from "./MapView";
+import ItemsList from "../item/ItemList";
 
-const Dashboard = ({ statuses, auth, notifications }) => {
+const Dashboard = ({ auth, items }) => {
   if (!auth.uid) return <Redirect to="/signin" />;
   return (
-    <Container>
+    <Container style={{ height: "94vh" }}>
       <Row>
         <PostButton />
       </Row>
       <Row>
-        <Col sm="12" md="7">
-          {/* <ItemsList /> */}
+        <Col md="3">
+          <div style={{ height: "75vh" }}>
+            <ItemsList items={items} />
+          </div>
         </Col>
-        <Col sm="12" md={{ size: 4, offset: 1 }}>
-          {/* <MapView /> */}
+        <Col sm="12" md={{ size: 8, offset: 1 }}>
+          <MapView />
         </Col>
       </Row>
     </Container>
@@ -28,11 +32,15 @@ const Dashboard = ({ statuses, auth, notifications }) => {
 const mapStateToProps = state => {
   return {
     faq: state.firestore.statuses,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    items: state.firestore.ordered.items
   };
 };
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "faq" }])
+  firestoreConnect([
+    { collection: "faq" },
+    { collection: "items", orderBy: ["date", "desc"] }
+  ])
 )(Dashboard);

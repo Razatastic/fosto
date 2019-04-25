@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 export default function PostButton({ setButtonClicked }) {
   return (
-    <Container className="float-right" style={{ margin: 20, marginBottom: 2 }}>
+    <Container
+      className="float-right"
+      style={{ marginTop: 40, marginBottom: 2 }}
+    >
       <Button
         style={{ margin: 5 }}
         color="primary"
@@ -12,7 +15,7 @@ export default function PostButton({ setButtonClicked }) {
         tag={Link}
         to="/create"
       >
-        New Status
+        Add an Item
       </Button>
       {/* <Button style={{ margin: 5 }} color="danger">
         Delete
