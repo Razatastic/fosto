@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -7,22 +7,27 @@ import { Redirect } from "react-router-dom";
 import { PostButton } from "./";
 import MapView from "./MapView";
 import ItemsList from "../item/ItemList";
+import ItemDetails from "../item/ItemDetails";
 
 const Dashboard = ({ auth, items }) => {
+  const [currentItem, setCurrentItem] = useState("");
   if (!auth.uid) return <Redirect to="/signin" />;
   return (
-    <Container style={{ height: "94vh" }}>
+    <Container>
       <Row>
         <PostButton />
       </Row>
       <Row>
-        <Col md="3">
-          <div style={{ height: "75vh" }}>
-            <ItemsList items={items} />
-          </div>
+        <Col className="itemList" md="3">
+          <ItemsList items={items} setCurrentItem={setCurrentItem} />
         </Col>
-        <Col sm="12" md={{ size: 8, offset: 1 }}>
-          <MapView />
+        <Col md={{ size: 8, offset: 1 }}>
+          <Row>
+            <MapView />
+          </Row>
+          <Row>
+            <ItemDetails itemId={currentItem} auth={auth} />
+          </Row>
         </Col>
       </Row>
     </Container>
@@ -41,6 +46,6 @@ export default compose(
   connect(mapStateToProps),
   firestoreConnect([
     { collection: "faq" },
-    { collection: "items", orderBy: ["date", "desc"] }
+    { collection: "items", orderBy: ["createdAt", "desc"] }
   ])
 )(Dashboard);

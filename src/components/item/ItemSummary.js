@@ -4,11 +4,11 @@ import moment from "moment";
 
 // Summarized version of item (displayed on dashboard)
 const ItemSummary = ({ item }) => {
-  const styles = item.status === "lost" ? "red" : "green";
+  const itemColor = item.status === "lost" ? "#FF4136" : "#FF851B";
 
   return (
     <Card body style={{ margin: 7 }}>
-      <CardTitle className="h4" style={{ color: styles }}>
+      <CardTitle className="h5" style={{ color: itemColor }}>
         {item.title}
       </CardTitle>
       <CardSubtitle>{item.content}</CardSubtitle>

@@ -6,7 +6,7 @@ export default function PostButton({ setButtonClicked }) {
   return (
     <Container
       className="float-right"
-      style={{ marginTop: 40, marginBottom: 2 }}
+      style={{ marginTop: 20, marginBottom: 2 }}
     >
       <Button
         style={{ margin: 5 }}
