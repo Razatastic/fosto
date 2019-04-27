@@ -1,44 +1,40 @@
-import React, { useState } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import React, { useEffect } from "react";
 
-const mapApiKey = process.env.REACT_APP_GM_API_KEY;
+export default function MapView() {
+  const mapApiKey = process.env.REACT_APP_GM_API_KEY;
+  const url =
+    "https://maps.googleapis.com/maps/api/js?key=" +
+    mapApiKey +
+    "&callback=initMap";
 
-function MapView({ google }) {
-  const [selectedPlace, setSelectedPlace] = useState({});
-  const [activeMarker, setActiveMarker] = useState({});
-  const [showingInfoWindow, setShowingInfoWindow] = useState(false);
-
-  const onMarkerClick = (props, marker, e) => {
-    setSelectedPlace(props);
-    setActiveMarker(marker);
-    setShowingInfoWindow(true);
+  const renderMap = () => {
+    loadScript(url);
+    window.initMap = initMap;
   };
 
-  const onMapClicked = props => {
-    if (showingInfoWindow) {
-      setShowingInfoWindow(false);
-      setActiveMarker(null);
-    }
+  const initMap = () => {
+    new window.google.maps.Map(document.getElementById("map"), {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 8
+    });
   };
+
+  useEffect(() => {
+    renderMap();
+  }, []);
 
   return (
-    <Map
-      google={google}
-      onClick={onMapClicked}
-      style={{ width: "100%", height: "100%", position: "absolute" }}
-      zoom={14}
-    >
-      <Marker onClick={onMarkerClick} name={"Current location"} />
-
-      <InfoWindow marker={activeMarker} visible={showingInfoWindow}>
-        <div>
-          <h1>{selectedPlace.name}</h1>
-        </div>
-      </InfoWindow>
-    </Map>
+    <div id="map" className="map">
+      <div>d</div>
+    </div>
   );
 }
 
-export default GoogleApiWrapper({
-  apiKey: mapApiKey
-})(MapView);
+function loadScript(url) {
+  const index = window.document.getElementsByTagName("script")[0];
+  const script = window.document.createElement("script");
+  script.src = url;
+  script.async = true;
+  script.differ = true;
+  index.parentNode.insertBefore(script, index);
+}
