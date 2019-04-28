@@ -4,29 +4,31 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
-import { PostButton } from "./";
-import MapView from "./MapView";
-import ItemsList from "../item/ItemList";
-import ItemDetails from "../item/ItemDetails";
+import { PostButton, MapView } from "./";
+import { ItemsList, ItemDetails } from "../item/";
 
 const Dashboard = ({ auth, items }) => {
-  const [currentItem, setCurrentItem] = useState("");
-  if (!auth.uid) return <Redirect to="/signin" />;
+  const [currentItem, setCurrentItem] = useState(items);
+
+  if (!auth.uid) return <Redirect to="/signin" />; // Redirect
+
   return (
     <Container>
       <Row>
         <PostButton />
       </Row>
       <Row>
+        {/* Sidebar */}
         <Col className="itemList" md="3">
           <ItemsList items={items} setCurrentItem={setCurrentItem} />
         </Col>
+        {/* Map */}
         <Col md={{ size: 8, offset: 1 }}>
           <Row>
             <MapView />
           </Row>
           <Row>
-            <ItemDetails itemId={currentItem} auth={auth} />
+            <ItemDetails currentItem={currentItem} userSignedIn={auth.uid} />
           </Row>
         </Col>
       </Row>
@@ -36,7 +38,6 @@ const Dashboard = ({ auth, items }) => {
 
 const mapStateToProps = state => {
   return {
-    faq: state.firestore.statuses,
     auth: state.firebase.auth,
     items: state.firestore.ordered.items
   };
@@ -44,8 +45,5 @@ const mapStateToProps = state => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([
-    { collection: "faq" },
-    { collection: "items", orderBy: ["createdAt", "desc"] }
-  ])
+  firestoreConnect([{ collection: "items", orderBy: ["createdAt", "desc"] }])
 )(Dashboard);
