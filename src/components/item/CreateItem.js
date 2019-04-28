@@ -3,13 +3,15 @@ import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
 import createItem from "../../store/actions/itemActions";
 import { Redirect } from "react-router-dom";
+import Geosuggest from "react-geosuggest";
 
 function CreateItem({ createItem, auth, history }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [date, setDate] = useState("");
-
+  const [location, setLocation] = useState("");
+  console.log(location);
   const handleSubmit = e => {
     e.preventDefault();
     createItem({ title, description, date, status });
@@ -49,6 +51,21 @@ function CreateItem({ createItem, auth, history }) {
             onChange={e => setDate(new Date(e.target.value))}
           />
         </FormGroup>
+        <FormGroup>
+          <Label for="Location">Location</Label>
+          <Geosuggest
+            style={{ width: 2000 }}
+            placeholder="Start typing!"
+            onSuggestSelect={e => {
+              setLocation({
+                lat: [e.location.lat][0],
+                lng: [e.location.lng][0]
+              });
+            }}
+            location={new window.google.maps.LatLng(53.558572, 9.9278215)}
+            radius="20"
+          />
+        </FormGroup>
         <FormGroup check>
           <Label check>
             <Input
@@ -70,6 +87,7 @@ function CreateItem({ createItem, auth, history }) {
             Found
           </Label>
         </FormGroup>
+
         <Button style={{ marginTop: 20 }}>Submit</Button>
       </Form>
     </Container>
@@ -84,7 +102,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createItem: status => dispatch(createItem(status))
+    createItem: item => dispatch(createItem(item))
   };
 };
 
