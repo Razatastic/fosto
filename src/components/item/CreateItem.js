@@ -6,15 +6,26 @@ import { Redirect } from "react-router-dom";
 import Geosuggest from "react-geosuggest";
 
 function CreateItem({ createItem, auth, history }) {
+  // State
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
-  console.log(location);
+
+  const onSuggestSelect = e => {
+    if (e) {
+      setLocation({
+        description: e.description,
+        lat: [e.location.lat][0],
+        lng: [e.location.lng][0]
+      });
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    createItem({ title, description, date, status });
+    createItem({ title, description, date, status, location });
     history.push("/dashboard");
   };
 
@@ -56,12 +67,7 @@ function CreateItem({ createItem, auth, history }) {
           <Geosuggest
             style={{ width: 2000 }}
             placeholder="Start typing!"
-            onSuggestSelect={e => {
-              setLocation({
-                lat: [e.location.lat][0],
-                lng: [e.location.lng][0]
-              });
-            }}
+            onSuggestSelect={onSuggestSelect}
             location={new window.google.maps.LatLng(53.558572, 9.9278215)}
             radius="20"
           />
