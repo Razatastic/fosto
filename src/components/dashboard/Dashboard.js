@@ -7,8 +7,9 @@ import { Redirect } from "react-router-dom";
 import { PostButton, MapView } from "./";
 import { ItemsList, ItemDetails } from "../item/";
 
-const Dashboard = ({ auth, items }) => {
-  const [currentItem, setCurrentItem] = useState(items);
+const Dashboard = ({ auth, items, ogItems }) => {
+  const [currentItemId, setCurrentItemId] = useState(items);
+  const currentItem = ogItems ? ogItems[currentItemId] : null;
 
   if (!auth.uid) return <Redirect to="/signin" />; // Redirect
 
@@ -20,7 +21,7 @@ const Dashboard = ({ auth, items }) => {
       <Row>
         {/* Sidebar */}
         <Col className="itemList" md="3">
-          <ItemsList items={items} setCurrentItem={setCurrentItem} />
+          <ItemsList items={items} setCurrentItemId={setCurrentItemId} />
         </Col>
         {/* Map */}
         <Col md={{ size: 8, offset: 1 }}>
@@ -28,7 +29,7 @@ const Dashboard = ({ auth, items }) => {
             <MapView />
           </Row>
           <Row>
-            <ItemDetails currentItem={currentItem} userSignedIn={auth.uid} />
+            <ItemDetails item={currentItem} userSignedIn={auth.uid} />
           </Row>
         </Col>
       </Row>
@@ -39,7 +40,8 @@ const Dashboard = ({ auth, items }) => {
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
-    items: state.firestore.ordered.items
+    items: state.firestore.ordered.items,
+    ogItems: state.firestore.data.items
   };
 };
 

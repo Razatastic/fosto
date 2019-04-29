@@ -1,26 +1,24 @@
 import React from "react";
 import { Container, Button } from "reactstrap";
 import moment from "moment";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 
-// Detailed view of status (displayed alone)
-const ItemDetails = ({ item, itemId, auth }) => {
+// Detailed view of status (displayed below MapView)
+const ItemDetails = ({ userSignedIn, item }) => {
   if (item) {
     return (
       <Container style={{ marginTop: 10 }}>
+        {/* Title */}
         <h5>{item.title} </h5>
-        <div className="lead">
-          {item.authorFirstName} {item.authorLastName}
-        </div>
+        <div className="lead">{item.location.description}</div>
         <div>
           <span style={{ fontSize: 14, color: "gray" }}>
             Date Posted: {moment(item.createdAt.toDate()).calendar()}
           </span>
+
+          {/* Check if user ID is the same as post author ID */}
           <Button
             onClick={() => {
-              item.authorId === auth.uid
+              item.authorId === userSignedIn
                 ? alert("You cannot contact yourself!")
                 : alert("Coming soon!");
             }}
@@ -41,16 +39,4 @@ const ItemDetails = ({ item, itemId, auth }) => {
   }
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const id = ownProps.itemId;
-  const items = state.firestore.data.items;
-  const item = items ? items[id] : null;
-  return {
-    item: item
-  };
-};
-
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([{ collection: "items" }])
-)(ItemDetails);
+export default ItemDetails;
