@@ -10,6 +10,8 @@ import { ItemsList, ItemDetails } from "../item/";
 const Dashboard = ({ auth, items, ogItems }) => {
   const [currentItemId, setCurrentItemId] = useState(items);
   const currentItem = ogItems ? ogItems[currentItemId] : null;
+  const currentLat = currentItem ? currentItem.location.lat : null;
+  const currentLng = currentItem ? currentItem.location.lng : null;
 
   if (!auth.uid) return <Redirect to="/signin" />; // Redirect
 
@@ -26,7 +28,7 @@ const Dashboard = ({ auth, items, ogItems }) => {
         {/* Map */}
         <Col md={{ size: 8, offset: 1 }}>
           <Row>
-            <MapView />
+            <MapView currentLat={currentLat} currentLng={currentLng} />
           </Row>
           <Row>
             <ItemDetails item={currentItem} userSignedIn={auth.uid} />
