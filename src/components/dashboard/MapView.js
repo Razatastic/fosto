@@ -9,8 +9,8 @@ function MapView({ currentLat, currentLng }) {
     <GoogleMap
       id="circle-example"
       mapContainerStyle={{
-        height: "600px",
-        width: "1000px"
+        height: "400px",
+        width: "900px"
       }}
       zoom={17}
       center={{

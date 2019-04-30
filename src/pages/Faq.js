@@ -10,7 +10,7 @@ function Faq({ faq }) {
     return (
       <Container style={{ marginTop: "5vh" }}>
         {/* Title */}
-        <h1 className="faqTitle display-5">F.A.Q.</h1>
+        <h1 className="faqTitle">F.A.Q.</h1>
         <ul style={{ listStyleType: "none" }}>
           {faq &&
             faq.map((dataValue, i) => (
