@@ -6,12 +6,14 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import { PostButton, MapView } from "./";
 import { ItemsList, ItemDetails } from "../item/";
+import ContactModal from "../item/ContactModal";
 
 const Dashboard = ({ auth, items, ogItems }) => {
   const [currentItemId, setCurrentItemId] = useState(items);
   const currentItem = ogItems ? ogItems[currentItemId] : null;
   const currentLat = currentItem ? currentItem.location.lat : null;
   const currentLng = currentItem ? currentItem.location.lng : null;
+  const [modalOpen, setModalOpen] = useState(false);
 
   if (!auth.uid) return <Redirect to="/signin" />; // Redirect
 
@@ -31,10 +33,16 @@ const Dashboard = ({ auth, items, ogItems }) => {
             <MapView currentLat={currentLat} currentLng={currentLng} />
           </Row>
           <Row>
-            <ItemDetails item={currentItem} userSignedIn={auth.uid} />
+            <ItemDetails
+              item={currentItem}
+              userSignedIn={auth.uid}
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+            />
           </Row>
         </Col>
       </Row>
+      <ContactModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </Container>
   );
 };

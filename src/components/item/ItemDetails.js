@@ -4,7 +4,7 @@ import moment from "moment";
 import ContactButton from "./ContactButton.js";
 
 // Detailed view of status (displayed below MapView)
-const ItemDetails = ({ userSignedIn, item }) => {
+const ItemDetails = ({ userSignedIn, item, setModalOpen, modalOpen }) => {
   if (item) {
     return (
       <Container style={{ marginTop: 30 }}>
@@ -15,7 +15,12 @@ const ItemDetails = ({ userSignedIn, item }) => {
           <span style={{ fontSize: 14, color: "gray" }}>
             Date Posted: {moment(item.createdAt.toDate()).calendar()}
           </span>
-          <ContactButton item={item} userSignedIn={userSignedIn} />
+          <ContactButton
+            item={item}
+            userSignedIn={userSignedIn}
+            setModalOpen={setModalOpen}
+            modalOpen={modalOpen}
+          />
         </div>
         <hr className="my-3" />
         <p>{item.description}</p>
