@@ -24,6 +24,7 @@ const store = createStore(
       userProfile: "users", // Tells the previous property where to get users from
       attachAuthIsReady: true
     }),
+    // Support for Redux dev-tools
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : f => f
