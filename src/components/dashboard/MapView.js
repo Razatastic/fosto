@@ -19,9 +19,6 @@ function MapView({ currentLat, currentLng }) {
       }}
     >
       <Marker
-        onLoad={marker => {
-          console.log("marker: ", marker);
-        }}
         position={{
           lat: currentLat,
           lng: currentLng
