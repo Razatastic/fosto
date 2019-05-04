@@ -1,33 +1,23 @@
-import React, { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { Layout } from "antd";
-import Sidebar from "../components/Sidebar";
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Container } from "reactstrap";
+import Footer from "../components/layout/Footer";
 
-const { Content } = Layout;
-
-const mapApiKey = process.env.REACT_APP_GM_API_KEY;
-
-export class MapContainer extends Component {
-  render() {
-    return (
-      <Layout>
-        <Sidebar />
-        <Content>
-          <Map
-            google={this.props.google}
-            zoom={14}
-            style={{ height: "100%", width: "100%" }}
-            className=" maps"
-          >
-            <Marker onClick={this.onMarkerClick} name={"Current Location"} />
-            <InfoWindow onClose={this.onInfoWindowClose} />
-          </Map>
-        </Content>
-      </Layout>
-    );
-  }
+function Home({ auth }) {
+  if (auth.uid) return <Redirect to="/dashboard" />;
+  return (
+    <Container className="vertical-center home">
+      Never "lose" anything again.
+      <Footer />
+    </Container>
+  );
 }
 
-export default GoogleApiWrapper({
-  apiKey: mapApiKey
-})(MapContainer);
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(Home);
