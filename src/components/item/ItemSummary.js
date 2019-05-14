@@ -1,10 +1,17 @@
 import React from "react";
-import { Card, CardTitle, CardSubtitle, CardText } from "reactstrap";
+import { Card, CardTitle, CardSubtitle, CardText, Button } from "reactstrap";
 import moment from "moment";
+import { resolveItem } from "../../store/actions/itemActions";
+import { connect } from "react-redux";
 
 // Summarized version of item (displayed on dashboard)
-const ItemSummary = ({ item }) => {
-  const itemColor = item.status === "lost" ? "#FF4136" : "#FF851B";
+const ItemSummary = ({ item, isProfile, resolveItem, id }) => {
+  let itemColor;
+  if (item.resolved) {
+    itemColor = "green";
+  } else {
+    item.status === "lost" ? (itemColor = "#FF4136") : (itemColor = "#FF851B");
+  }
 
   return (
     <Card body style={{ margin: 7 }}>
@@ -15,8 +22,20 @@ const ItemSummary = ({ item }) => {
       <CardText style={{ fontSize: 12, color: "gray" }}>
         {moment(item.date.toDate()).calendar()}
       </CardText>
+      {isProfile && !item.resolved ? (
+        <Button onClick={() => resolveItem(id)}>Mark as Resolved</Button>
+      ) : null}
     </Card>
   );
 };
 
-export default ItemSummary;
+const mapDispatchToProps = dispatch => {
+  return {
+    resolveItem: item => dispatch(resolveItem(item))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ItemSummary);

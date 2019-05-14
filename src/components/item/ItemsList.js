@@ -8,11 +8,13 @@ export default function ItemList({ items, setCurrentItemId }) {
     return (
       <ListGroup>
         {items &&
-          items.map(item => (
-            <div onClick={() => setCurrentItemId(item.id)} key={item.id}>
-              <ItemSummary item={item} />
-            </div>
-          ))}
+          items.map(item =>
+            !item.resolved ? (
+              <div onClick={() => setCurrentItemId(item.id)} key={item.id}>
+                <ItemSummary item={item} />
+              </div>
+            ) : null
+          )}
       </ListGroup>
     );
   } else {

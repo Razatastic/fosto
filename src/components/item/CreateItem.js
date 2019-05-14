@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
-import createItem from "../../store/actions/itemActions";
+import { createItem } from "../../store/actions/itemActions";
 import { Redirect } from "react-router-dom";
 import Geosuggest from "react-geosuggest";
 

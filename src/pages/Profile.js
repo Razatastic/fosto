@@ -1,18 +1,40 @@
 import React from "react";
-import { Container } from "reactstrap";
+import { Container, ListGroup } from "reactstrap";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import ItemSummary from "../components/item/ItemSummary";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import LoadingIcon from "../components/layout/LoadingIcon";
 
-function Profile({ auth, profile }) {
+function Profile({ auth, profile, items }) {
   if (!auth.uid) return <Redirect to="/signin" />;
+  console.log(items);
   return (
     <Container>
-      <p className="text-center display-1" style={{ marginTop: 50 }}>
+      <p
+        className="text-center display-1"
+        style={{ marginTop: 50, marginBottom: 50 }}
+      >
         {profile.initials}
       </p>
-      <p className="text-center display-4" style={{ marginTop: 50 }}>
-        Check back soon!
-      </p>
+      {items ? (
+        <ListGroup>
+          {items &&
+            items.map(item =>
+              item.authorId === auth.uid ? (
+                <ItemSummary
+                  item={item}
+                  key={item.id}
+                  isProfile={true}
+                  id={item.id}
+                />
+              ) : null
+            )}
+        </ListGroup>
+      ) : (
+        <LoadingIcon />
+      )}
     </Container>
   );
 }
@@ -20,8 +42,12 @@ function Profile({ auth, profile }) {
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
-    profile: state.firebase.profile
+    profile: state.firebase.profile,
+    items: state.firestore.ordered.items
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "items", orderBy: ["createdAt", "desc"] }])
+)(Profile);

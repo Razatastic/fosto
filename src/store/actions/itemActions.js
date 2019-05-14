@@ -1,4 +1,4 @@
-const createItem = item => {
+export const createItem = item => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //make async call to database
     const authorId = getState().firebase.auth.uid;
@@ -20,4 +20,19 @@ const createItem = item => {
   };
 };
 
-export default createItem;
+export const resolveItem = item => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    //make async call to database
+    const firestore = getFirestore();
+    firestore
+      .collection("items")
+      .doc(item)
+      .update({ resolved: true })
+      .then(() => {
+        dispatch({ type: "RESOLVE_ITEM", item });
+      })
+      .catch(err => {
+        dispatch({ type: "RESOLVE_ITEM_ERROR", err });
+      });
+  };
+};

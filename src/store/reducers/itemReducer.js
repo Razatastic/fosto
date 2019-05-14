@@ -9,6 +9,11 @@ const itemReducer = (state = initState, action) => {
     case "CREATE_ITEM_ERROR":
       console.log("Create item error", action.err);
       return state;
+    case "RESOLVE_ITEM":
+      return state;
+    case "RESOLVE_ITEM_ERROR":
+      console.log("Resolve item error", action.err);
+      return state;
     default:
       return state;
   }
