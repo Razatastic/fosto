@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["dropdown", "fosto", "logo", "reactstrap", "uncontrolled"]
+  "cSpell.words": [
+    "dropdown",
+    "firestore",
+    "fosto",
+    "logo",
+    "reactstrap",
+    "signin",
+    "uncontrolled"
+  ]
 }
