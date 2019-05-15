@@ -66,7 +66,7 @@ function CreateItem({ createItem, auth, history }) {
           <Label for="Location">Location</Label>
           <Geosuggest
             style={{ width: 2000 }}
-            placeholder="Start typing!"
+            placeholder="2900 Bedford Ave"
             onSuggestSelect={onSuggestSelect}
             location={new window.google.maps.LatLng(53.558572, 9.9278215)}
             radius="20"
