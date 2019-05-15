@@ -9,7 +9,7 @@ import LoadingIcon from "../components/layout/LoadingIcon";
 
 function Profile({ auth, profile, items }) {
   if (!auth.uid) return <Redirect to="/signin" />;
-  console.log(items);
+  if (items) console.log(items.length);
   return (
     <Container>
       <p
@@ -19,19 +19,26 @@ function Profile({ auth, profile, items }) {
         {profile.initials}
       </p>
       {items ? (
-        <ListGroup>
-          {items &&
-            items.map(item =>
-              item.authorId === auth.uid ? (
-                <ItemSummary
-                  item={item}
-                  key={item.id}
-                  isProfile={true}
-                  id={item.id}
-                />
-              ) : null
-            )}
-        </ListGroup>
+        items.length > 0 ? (
+          <ListGroup>
+            {items &&
+              items.map(item =>
+                item.authorId === auth.uid ? (
+                  <ItemSummary
+                    item={item}
+                    key={item.id}
+                    isProfile={true}
+                    id={item.id}
+                  />
+                ) : null
+              )}
+          </ListGroup>
+        ) : (
+          <p className="text-center h4">
+            There's nothing here! Once you add a listing on the dashboard, it'll
+            appear here.
+          </p>
+        )
       ) : (
         <LoadingIcon />
       )}
